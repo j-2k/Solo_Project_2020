@@ -8,6 +8,9 @@ TagManager:
   - Node
   - Boid
   - LeadBoid
+  - ScoreTemplate
+  - PFManager
+  - PFNode
   layers:
   - Default
   - TransparentFX

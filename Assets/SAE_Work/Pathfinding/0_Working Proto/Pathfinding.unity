@@ -549,7 +549,7 @@ PrefabInstance:
     - target: {fileID: 3179579853978150583, guid: 0ff416197f8b58b44a8a3fb700925a6f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.94
+      value: -0.34
       objectReference: {fileID: 0}
     - target: {fileID: 3179579853978150583, guid: 0ff416197f8b58b44a8a3fb700925a6f,
         type: 3}
@@ -559,7 +559,7 @@ PrefabInstance:
     - target: {fileID: 3179579853978150583, guid: 0ff416197f8b58b44a8a3fb700925a6f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.64
+      value: 11.31
       objectReference: {fileID: 0}
     - target: {fileID: 3179579853978150583, guid: 0ff416197f8b58b44a8a3fb700925a6f,
         type: 3}
@@ -909,6 +909,7 @@ MonoBehaviour:
   wallMaskInsp:
     serializedVersion: 2
     m_Bits: 256
+  nodesPositions: []
 --- !u!114 &1973995896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,7 +932,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973995893}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 722d83e529e5e6b4488d04f4e135fbad, type: 3}
   m_Name: 
