@@ -7,7 +7,7 @@ public class GOAPAgentString : MonoBehaviour
 {
     public List<string> agentGoals;
     public List<string> worldState;
-    List<GoapActionString> agentActions;
+    [SerializeField] List<GoapActionString> agentActions;
     Stack<GoapActionString> currPlan;
 
     // Start is called before the first frame update
@@ -26,23 +26,23 @@ public class GOAPAgentString : MonoBehaviour
             while (currPlan.Count != 0)                     //as long as we have a plan keep running the agents actions
             {
                 currPlan.Pop().RunActionString(this);             //here we start & run the action (if by any chance there is no action left or something fails we force a NEW plan)
-            }
+            }  //^this will run all the actions after the agent finishes planning (adding all the actions in sequences in a stack and run them all essentially)
         }
     }
 
     public void AgentPlanning()
     {
         currPlan.Clear();
-        List<string> newTargetStates = new List<string>(agentGoals);
-        while(CompareStates(worldState,newTargetStates) > 0)    //as long as the new target state is not contained in the world states we keep on running this while loop
+        List<string> newGoalStates = new List<string>(agentGoals);
+        while(CompareStates(worldState, newGoalStates) > 0)    //as long as the new target state is not contained in the world states we keep on running this while loop
         {
-            GoapActionString bestAction = GetBestAction(newTargetStates);
+            GoapActionString bestAction = GetBestAction(newGoalStates);
             currPlan.Push(bestAction);
-            RemoveUniqueStates(newTargetStates, bestAction.outcomeStates);
-            AddUniqueStates(newTargetStates, bestAction.requiredStates);
+            RemoveUniqueStates(newGoalStates, bestAction.outcomeStates);        //remove the current action outcome from the goal states since we already got there.
+            AddUniqueStates(newGoalStates, bestAction.requiredStates);          //add to the goal state the required action we need to get there and becomes the new goal to reach.
         }
     }
-
+    //compare 2 states and see which matches or not (count how many subsets being compared to set is not contained)
     int CompareStates (List<string> set, List<string> subset)   //CompareStates function will be responsible for comparing the states of the agent and we will be checking
     {                                                           //2 things at the start we will check the set and the subset, WHICH SET WE ARE CHECKING IS SUBSET.
         int difference = 0;                                     //We have a difference int that will track how many differences / states cannot be done 

@@ -5,14 +5,13 @@ using UnityEngine;
 public abstract class GOAPGoal : MonoBehaviour
 {
     string finalGoal;
-    public GOAPStates finalState;
+    public GOAPStates agentsFinalGoal;
 
     private void Start()
     {
+        finalGoal = GetType().Name;
         GOAPStart();
     }
 
-    public abstract bool GOAPStart();
-
-    public abstract bool ValidGoal(GOAPAgent agent);
+    public abstract void GOAPStart();
 }

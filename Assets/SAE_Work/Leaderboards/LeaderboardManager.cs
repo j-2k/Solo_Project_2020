@@ -17,7 +17,6 @@ public class LeaderboardManager : MonoBehaviour
     [SerializeField] Transform lbContainer;
     [SerializeField] Transform lbTemplate;
     [SerializeField] float templateHeight;
-    [SerializeField] int numOfEntries;
     //====================================
     [SerializeField] List<LeaderboardEntry> listOfLBScoreEntry;
     [SerializeField] List<Transform> listOfLBTransform;
@@ -152,7 +151,7 @@ public class LeaderboardManager : MonoBehaviour
 
     public void LoadDataLE()
     {
-        foreach (GameObject temp in GameObject.FindGameObjectsWithTag("ScoreTemplate"))
+        foreach (GameObject temp in GameObject.FindGameObjectsWithTag("ScoreTemplate")) //load new data aka delete our current leaderboard date & display new saved ones
         {
             if (temp.tag == "ScoreTemplate")
             {

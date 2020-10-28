@@ -606,27 +606,15 @@ GameObject:
   - component: {fileID: 692991132}
   - component: {fileID: 692991131}
   - component: {fileID: 692991129}
-  - component: {fileID: 692991128}
   - component: {fileID: 692991130}
+  - component: {fileID: 692991136}
   m_Layer: 0
-  m_Name: V2 Agent (1)
+  m_Name: 'V2 Agent '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &692991128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692991127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 038933385f763f74e96746cb44e93f99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_IsActive: 0
 --- !u!114 &692991129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,7 +627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b876e684478093346ad228a6de72a03e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldStates: {fileID: 692991128}
+  worldStates: {fileID: 0}
   planDepth: 5
   speed: 2
 --- !u!114 &692991130
@@ -655,8 +643,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentAction: 
-  outcomeStates: {fileID: 692991128}
-  requiredStates: {fileID: 692991128}
+  outcomeStates: {fileID: 0}
+  requiredStates: {fileID: 0}
   meleeItem: {fileID: 518951938}
 --- !u!54 &692991131
 Rigidbody:
@@ -742,12 +730,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 692991127}
   m_LocalRotation: {x: -0, y: -0.22418351, z: -0, w: 0.97454697}
-  m_LocalPosition: {x: 6.86, y: 0.66326, z: -9.31}
+  m_LocalPosition: {x: 3.55, y: 0.66326, z: -9.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -25.910002, z: 0}
+--- !u!114 &692991136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692991127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51e729ba9812c1d4fa9b1f7a0c0fa2fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentsFinalGoal: {fileID: 0}
 --- !u!1 &793790786
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,6 +857,7 @@ GameObject:
   - component: {fileID: 1197799504}
   - component: {fileID: 1197799511}
   - component: {fileID: 1197799510}
+  - component: {fileID: 1197799512}
   - component: {fileID: 1197799509}
   m_Layer: 0
   m_Name: SIMPLE Agent
@@ -863,7 +865,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &1197799504
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -967,7 +969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentGoals:
-  - Attacking
+  - jumponpadwithsword
   worldState: []
 --- !u!114 &1197799510
 MonoBehaviour:
@@ -981,9 +983,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb725ddc1d054ac408d821910d679350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionName: MoveToTarget
+  actionName: move_towards_pad
   outcomeStates:
-  - nearenemy
+  - on_pad
   requiredStates: []
 --- !u!114 &1197799511
 MonoBehaviour:
@@ -997,11 +999,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb725ddc1d054ac408d821910d679350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionName: MeleeAttack
+  actionName: Jumping_On_The_Pad
   outcomeStates:
-  - Attacking
+  - jumponpadwithsword
   requiredStates:
-  - nearenemy
+  - on_pad
+  - has_sword
+--- !u!114 &1197799512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197799503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb725ddc1d054ac408d821910d679350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: move_towards_sword
+  outcomeStates:
+  - has_sword
+  requiredStates: []
 --- !u!1 &1990186780
 GameObject:
   m_ObjectHideFlags: 0

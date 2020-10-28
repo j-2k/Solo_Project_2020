@@ -10,6 +10,7 @@ public abstract class GOAPAction : MonoBehaviour
 
     void Start()
     {//aa=th.gt.nm
+        agentAction = GetType().Name;
         GOAPStart();
     }
 

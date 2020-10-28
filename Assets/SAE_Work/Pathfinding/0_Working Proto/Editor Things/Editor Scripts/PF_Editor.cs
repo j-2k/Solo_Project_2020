@@ -47,6 +47,10 @@ public class PF_Editor : EditorWindow
 
         if (GUILayout.Button("Add A New Node"))
         {
+            if (GameObject.FindGameObjectWithTag("PFManager") == null)
+            {
+                Debug.LogError("You are adding nodes without the main pathfinding component implemented. Did you forget to implement the main pathfinding component?");
+            }
             if (GameObject.Find("NodesHolder") == null)
             {
                 GameObject emptyNodesHolder = new GameObject();
@@ -75,20 +79,28 @@ public class PF_Editor : EditorWindow
 
         if (GUILayout.Button("Test Pathfinding"))
         {
+            EditorApplication.isPlaying = true;
             Debug.Log("Checking if you have all pathfinding tools ready & initialized!");
             if (GameObject.FindGameObjectWithTag("PFManager") != null)
             {
-                /*if (PathfindingImplementer.GetComponent<GraphMapBuilder>() == null)
+                GameObject PathfindingImplementer = GameObject.FindGameObjectWithTag("PFManager");
+                if (PathfindingImplementer.GetComponent<GraphMapBuilder>() == null)
                 {
+                    Debug.Log("You were missing the main pathfinding component, Thus it will be automatically added");
                     PathfindingImplementer.AddComponent<GraphMapBuilder>();
                 }
                 if (PathfindingImplementer.GetComponent<PFE_Helper>() == null)
                 {
+                    Debug.Log("You were missing a aiding pathfinding component, Thus it will be automatically added");
                     PathfindingImplementer.AddComponent<PFE_Helper>();
-                }*/
+                }
+                Debug.Log("Please pay attention to the yellow line displayed at the top of the nodes will be your shortest path!");
             }
-            EditorApplication.isPlaying = true;
-            Debug.Log("Please pay attention to the yellow line displayed at the top of the nodes will be your shortest path!");
+            else
+            {
+                Debug.LogError("You have no pathfinding component, please add the main pathfinding implementer first!");
+                EditorApplication.isPlaying = false;
+            }
         }
 
         if (GUILayout.Button("Delete All Pathfinding Nodes"))

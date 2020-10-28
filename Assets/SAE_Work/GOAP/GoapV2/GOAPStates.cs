@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GOAPStates : MonoBehaviour
 {
+    /*
     List<string> baseStates;
 
     //vvvvvvvvvv COPY STATE STRINGS CONS vvvvvvvvvv
@@ -17,6 +18,7 @@ public class GOAPStates : MonoBehaviour
         baseStates = new List<string>(CopyString.baseStates);
     }
     //^^^^^^^^^^ COPY STATE STRINGS CONS ^^^^^^^^^^
+    
 
     public int CompareStates(GOAPStates subset)                                     //CompareStates function will be responsible for comparing the states of the agent and we will be checking
     {                                                                               //2 things at the start we will check the set and the subset, WHICH SET WE ARE CHECKING IS SUBSET.
@@ -49,4 +51,55 @@ public class GOAPStates : MonoBehaviour
             baseStates.Remove(tobeRemovedStates.baseStates[i]);
         }
     }
+    */
+    public void AddNewState(string state)
+    {
+        baseStates.Add(state);
+    }
+
+    public void RemoveNewState(string state)
+    {
+        baseStates.Remove(state);
+    }
+
+    HashSet<string> baseStates;
+    public GOAPStates()
+    {
+        baseStates = new HashSet<string>();
+    }
+
+    public GOAPStates(GOAPStates copyInfo)
+    {
+        baseStates = new HashSet<string>(copyInfo.baseStates);
+    }
+
+    public int CompareStates(GOAPStates subset)                                     
+    {                                                                               
+        int difference = 0;
+        foreach (string stringInfo in subset.baseStates)
+        {
+            if (baseStates.Contains(stringInfo) == false)
+            {
+                difference++;
+            }
+        }                                                                      
+        return difference;                                                          
+    }
+
+    public void AddUniqueStates(GOAPStates tobeAddedStates)
+    {
+        foreach (string stringInfo in tobeAddedStates.baseStates)
+        {
+            baseStates.Add(stringInfo);
+        }
+    }
+
+    public void RemoveUniqueStates(GOAPStates tobeRemovedStates)
+    {
+        foreach (string stringInfo in tobeRemovedStates.baseStates)
+        {
+            baseStates.Remove(stringInfo);
+        }
+    }
+
 }

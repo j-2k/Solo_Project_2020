@@ -22,6 +22,8 @@ public class GOAPAgent : MonoBehaviour
         agentActions = new List<GOAPAction>(GetComponents<GOAPAction>());
         agentGoals = new List<GOAPGoal>(GetComponents<GOAPGoal>());
         currPlan = new Queue<GOAPAction>();
+
+        agentGoals.Add(new G_KillEnemy());
     }
 
     void Update()
@@ -51,7 +53,7 @@ public class GOAPAgent : MonoBehaviour
         //START INITIALIZING BASE VALUES FOR OUR STACKS
         goapSimWorldStates.Push(new GOAPStates(worldStates));               //push the present real world state for the agent
         goapSimTreeDepth.Push(0);                                          //push 0 depth because we just are starting the plan so when initializng we are just at 0
-        goapSimActions.Push(null);                                         //here we push null because we again we just starting the plan and we have no actions yet but we push null to make sure the agent moves together with the other stacks
+        goapSimActions.Push(null);                                         //here we push null because we again we just starting the plan and we have no actions yet but we push null to make sure the agent moves together with the other stacks also action is null @ very start
 
         //NOW BEGIN THE PLANNING LOOP, now we will keep planning and find ALL the tree nodes UNTILL we find everything from the present to then finally pop the actual present node from the stack 
         //ONCE we have popped the present node this means we have bascially reached the end and have information on all the nodes
@@ -62,11 +64,12 @@ public class GOAPAgent : MonoBehaviour
             GOAPAction agentCurrentAction = goapSimActions.Pop();          //get the actions that have led us to this current world state
             agentSimPlans[agentCurrentDepth] = agentCurrentAction;         //insert our agents current action in an array so we know what we have gone through
 
-            //check if i reached the goal or the max planned depth
-            if (agentCurrentSimState.CompareStates(agentGoals[0].finalState) == 0 || agentCurrentDepth >= planDepth)
+            //check if i reached the goal or the current depth is larger than the max planned depth.
+            if (agentCurrentSimState.CompareStates(agentGoals[0].agentsFinalGoal) == 0 || agentCurrentDepth >= planDepth)
             {
                 if (agentCurrentDepth < lowestDepth)
                 {
+                    // if the agents current depth is lower than the lowest depth the remove our plan and start a new one.
                     currPlan.Clear();
                     for (int i = 0; i < agentSimPlans.Length; i++)
                     {

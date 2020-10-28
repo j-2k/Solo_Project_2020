@@ -38,7 +38,7 @@ public class FlockTesting : MonoBehaviour
 
     void Update()
     {
-        if (flocking == true)
+        if (flocking == true)//testing
         {
             this.rb.velocity += ((Alignment() * alignmentWeight) + (Cohesion() * cohesionWeight) + (Seperation() * seperationWeight)) * maxSpeed;
             transform.LookAt(player.transform);
@@ -58,44 +58,44 @@ public class FlockTesting : MonoBehaviour
     {
         Vector3 velocity = Vector3.zero;
         int neighbourCount = 0;
-        for (int i = 0; i < neighbours.Count; i++)
+        for (int i = 0; i < neighbours.Count; i++)                                                                      //iterate through all the neighbours
         {
-            if (this.transform.gameObject != neighbours[i].gameObject)
+            if (this.transform.gameObject != neighbours[i].gameObject)                                                  //check the agents that are not neighbours yet
             {
-                if (Vector3.Distance(this.transform.position, neighbours[i].transform.position) < alignmentDistance)
+                if (Vector3.Distance(this.transform.position, neighbours[i].transform.position) < alignmentDistance)    // distance check for this agent and neighboring agents and succeed if the distance is less than the alignment dist
                 {
-                    velocity += neighbours[i].velocity.normalized;
+                    velocity += neighbours[i].velocity.normalized;                                                      //once neighbouring agent is close enough, add their velocity to our velocity & increment neighbour count
                     //===============
                     neighbourCount++;
                 }
             }
         }
 
-        velocity /= neighbourCount;
-        Vector3 vAlignment = velocity.normalized; //* alignmentWeight;
-        return vAlignment;
+        velocity /= neighbourCount;                                     //divide the computation vector by the neighbor count and normalize it (we already normalized previously)
+        Vector3 vAlignment = velocity.normalized; //* alignmentWeight;  //obtaining the final resultant vector.
+        return vAlignment;                                                  
     }
 
     Vector3 Cohesion()
     {
         Vector3 centerVelocity = Vector3.zero;
         int neighbourCount = 0;
-        for (int i = 0; i < neighbours.Count; i++)
+        for (int i = 0; i < neighbours.Count; i++)                                                                  //iterate through all the neighbours
         {
-            if (this.transform.gameObject != neighbours[i].gameObject)
+            if (this.transform.gameObject != neighbours[i].gameObject)                                              //check if this agent is or not a neighbour yet
             {
-                if (Vector3.Distance(this.transform.position, neighbours[i].transform.position) < cohesionDistance)
+                if (Vector3.Distance(this.transform.position, neighbours[i].transform.position) < cohesionDistance) // distance check for this agent and neighboring agents and succeed if the distance is less than the cohesion dist
                 {
                     Debug.Log("cohesion work?");
-                    centerVelocity += neighbours[i].transform.position;
+                    centerVelocity += neighbours[i].transform.position;                                             //same as allignment but instead we add the positions of the neighbours to our agent.
                     //===============
                     neighbourCount++;
                 }
             }
         }
 
-        centerVelocity /= neighbourCount;
-        Vector3 vCohesion = (centerVelocity - this.transform.position).normalized;//* cohesionWeight //center direction
+        centerVelocity /= neighbourCount;                                                                           //now divide the velocity by the neighbourscount thus resulting in a position that corresponds to the "center of mass"
+        Vector3 vCohesion = (centerVelocity - this.transform.position).normalized;//* cohesionWeight                //center direction
         return vCohesion;
     }
 
@@ -109,8 +109,8 @@ public class FlockTesting : MonoBehaviour
                 float distance = Vector3.Distance(this.transform.position, neighbours[i].transform.position);
                 if (Vector3.Distance(this.transform.position, neighbours[i].transform.position) < seperationDistance)
                 {
-                    seperationCompVec += (neighbours[i].transform.position - this.transform.position).normalized * (-1 + (distance / seperationDistance));
-                }
+                    seperationCompVec += (neighbours[i].transform.position - this.transform.position).normalized * -1;                                                                      // (-1 + (d / sepd)); 
+                }   //now add the position calculated (direction of seperation) to the seperationvector (the normalized direction is pointing towards the neighbours) thus we have to inverse it by multiplying it by -1 and adding the dist/seperation distance will 
             }
         }
 

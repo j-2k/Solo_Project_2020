@@ -8,7 +8,7 @@ public class A_GetMeleeItem : GOAPAction
 
     public override void GOAPStart()
     {
-       
+        outcomeStates.AddNewState("WeildingMelee");
     }
 
     public override bool RunAction(GOAPAgent agent)

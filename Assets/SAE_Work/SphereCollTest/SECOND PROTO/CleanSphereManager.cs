@@ -77,10 +77,10 @@ public class CleanSphereManager : MonoBehaviour
         //======================================================================================================
         Vector3 blueSphereHypo = sphere1BlueInitialVelo;
         Vector3 collisionDir = dir2RedS.normalized;
-        float blueA1 = Vector3.Dot(blueSphereHypo, collisionDir);
+        float blueA1 = Vector3.Dot(blueSphereHypo, collisionDir);               // length of the component of each of the movement vectors along the dir
         Vector3 redSphereHypo = sphere2RedInitialVelo;
         //Vector3 redSphereDir = dir2BlueS.normalized;
-        float redA2 = Vector3.Dot(redSphereHypo, collisionDir);//redSphereDir);
+        float redA2 = Vector3.Dot(redSphereHypo, collisionDir);//redSphereDir); 
         float P = (2 * (blueA1 - redA2)) / (1 + 1);
         Vector3 blueNewV1 = blueSphereHypo - P * 1 * collisionDir;//redSphereDir;
         Vector3 redNewV1 = redSphereHypo + P * 1 * collisionDir;

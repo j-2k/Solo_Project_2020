@@ -8,7 +8,9 @@ using DijkstraAPI;
 using JetBrains.Annotations;
 
 public class GraphMapBuilder : MonoBehaviour
-{ 
+{
+    public int startingNode = 0;
+    public int endingNode = 2;
     private GameObject[] nodes;
     private float[][] connections;
     [SerializeField] LayerMask wallMaskInsp;
@@ -163,8 +165,8 @@ public class GraphMapBuilder : MonoBehaviour
     List<Vector3> path;
     private List<Vector3> DijkstraShortestPath()//(Vector3 startPosition, Vector3 endPosition)
     {
-        int startNode = 0;
-        int endNode = 2;
+        int startNode = startingNode;
+        int endNode = endingNode;
 
         path = new List<Vector3>();
         List<int> unexploredNodes = new List<int>();        // creating a set of verticies for the unexploredNodes
@@ -213,7 +215,7 @@ public class GraphMapBuilder : MonoBehaviour
             {
                 if (connections[current][j] == -1)                              //filter out all the non connections
                 {
-                    continue;
+                    continue;   //skip
                 }
 
                 float newDist = dist[current] + connections[current][j];        //get the new distances / neighbours 
